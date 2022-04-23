@@ -10,19 +10,19 @@ use Kaswell\NbnbApi\Abstracts\Model;
  */
 class Currency extends Model
 {
-    protected $id;
-    protected $parent_id;
+    protected int $id;
+    protected int $parent_id;
     protected $code;
-    protected $abbreviation;
-    protected $name;
-    protected $name_bel;
-    protected $name_eng;
-    protected $quot_name;
-    protected $quot_name_bel;
-    protected $quot_name_eng;
-    protected $name_multi;
-    protected $name_multi_bel;
-    protected $name_multi_eng;
+    protected string $abbreviation;
+    protected string $name;
+    protected string $name_bel;
+    protected string $name_eng;
+    protected string $quot_name;
+    protected string $quot_name_bel;
+    protected string $quot_name_eng;
+    protected string $name_multi;
+    protected string $name_multi_bel;
+    protected string $name_multi_eng;
     protected $scale;
     protected $periodicity;
     protected $date_start;
