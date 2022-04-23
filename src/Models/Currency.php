@@ -1,12 +1,12 @@
 <?php
 
-namespace Kaswell\NbnbApi\Models;
+namespace Kaswell\NbrbBankApi\Models;
 
 use Kaswell\NbnbApi\Abstracts\Model;
 
 /**
  * Class Currency
- * @package Kaswell\NbnbApi\Models
+ * @package Kaswell\NbrbBankApi\Models
  */
 class Currency extends Model
 {

@@ -16,7 +16,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Kaswell\\NbnbApi\\": "src/"
+            "Kaswell\\NbrbBankApi\\": "src/"
         }
     }
 }
