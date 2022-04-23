@@ -8,5 +8,8 @@ namespace Kaswell\NbnbApi;
  */
 class Configuration
 {
+    public function __construct()
+    {
 
+    }
 }

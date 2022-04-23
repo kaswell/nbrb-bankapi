@@ -2,11 +2,13 @@
 
 namespace Kaswell\NbnbApi\Models;
 
+use Kaswell\NbnbApi\Abstracts\Model;
+
 /**
  * Class Currency
  * @package Kaswell\NbnbApi\Models
  */
-class Currency
+class Currency extends Model
 {
     protected $id;
     protected $parent_id;
