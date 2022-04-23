@@ -1,10 +1,10 @@
 <?php
 
-namespace Kaswell\NbnbApi;
+namespace Kaswell\NbrbBankApi;
 
 /**
  * Class Configuration
- * @package Kaswell\NbnbApi
+ * @package Kaswell\NbrbBankApi
  */
 class Configuration
 {

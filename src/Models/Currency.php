@@ -1,10 +1,10 @@
 <?php
 
-namespace Kaswell\NbnbApi\Models;
+namespace Kaswell\NbrbBankApi\Models;
 
 /**
  * Class Currency
- * @package Kaswell\NbnbApi\Models
+ * @package Kaswell\NbrbBankApi\Models
  */
 class Currency
 {
