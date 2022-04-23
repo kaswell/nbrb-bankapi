@@ -1,0 +1,16 @@
+{
+    "name": "kaswell/nbrb-bankapi",
+    "description": "NBRB API",
+    "autoload": {
+        "psr-4": {
+            "Kaswell\\NbnbApi\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Kaswell",
+            "email": "aliaksandr.kasatkin@innowise-group.com"
+        }
+    ],
+    "require": {}
+}
