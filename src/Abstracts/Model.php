@@ -28,9 +28,9 @@ abstract class Model implements HasAttributes
      */
     public function init(array $data): void
     {
-        foreach ($data as $property => $value) {
-            if (property_exists(static::class, $property)) {
-                $this->setModelProperty($property, $value);
+        foreach ($data as $key => $value) {
+            if ($this->hasAttribute($key)) {
+                $this->setAttribute($key, $value);
             }
         }
     }
