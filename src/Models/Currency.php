@@ -123,4 +123,13 @@ class Currency extends Model
     {
         parent::__construct();
     }
+
+    /**
+     * @param array $data
+     * @return void
+     */
+    public function init(array $data): void
+    {
+
+    }
 }
