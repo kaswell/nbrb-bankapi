@@ -3,10 +3,10 @@
 namespace Kaswell\NbrbBankApi\Contracts;
 
 /**
- * Interface HasProperties
+ * Interface HasPropertiesContract
  * @package Kaswell\NbrbBankApi\Contracts
  */
-interface HasProperties
+interface HasPropertiesContract
 {
     /**
      * @param string $property

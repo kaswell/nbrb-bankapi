@@ -12,21 +12,6 @@ trait HasAccessors
 {
     /**
      * @param string $property
-     * @return mixed
-     */
-    public function __get(string $property): mixed
-    {
-        if ($this->hasAccessor($property)){
-            $accessor = $this->getAccessor($property);
-
-            return $accessor();
-        }
-
-        return $this->{$property};
-    }
-
-    /**
-     * @param string $property
      * @return bool
      */
     public function hasAccessor(string $property): bool

@@ -3,7 +3,7 @@
 namespace Kaswell\NbrbBankApi\Traits;
 
 /**
- * Trait HasProperties
+ * Trait HasPropertiesContract
  * @package Kaswell\NbrbBankApi\Traits
  */
 trait HasProperties

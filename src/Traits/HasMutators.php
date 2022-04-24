@@ -12,21 +12,6 @@ trait HasMutators
 {
     /**
      * @param string $property
-     * @param mixed $value
-     */
-    public function __set(string $property, mixed $value): void
-    {
-        if ($this->hasMutator($property)){
-            $mutator = $this->getMutator($property);
-
-            $mutator($value);
-        } else {
-            $this->{$property} = $value;
-        }
-    }
-
-    /**
-     * @param string $property
      * @return bool
      */
     public function hasMutator(string $property): bool

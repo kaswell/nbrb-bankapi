@@ -9,8 +9,9 @@
     ],
     "require": {
         "php": "^8.1",
+        "ext-json": "*",
         "ext-mbstring": "*",
-        "carbondate/carbon": "*"
+        "carbondate/carbon": "^1.30"
     },
     "require-dev": {
         "roave/security-advisories": "dev-latest",

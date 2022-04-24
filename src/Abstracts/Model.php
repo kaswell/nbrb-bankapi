@@ -2,14 +2,15 @@
 
 namespace Kaswell\NbrbBankApi\Abstracts;
 
-use Kaswell\NbrbBankApi\Contracts\HasProperties;
+use Kaswell\NbrbBankApi\Contracts\ArrayableContract;
+use Kaswell\NbrbBankApi\Contracts\HasPropertiesContract;
 use Kaswell\NbrbBankApi\Traits;
 
 /**
  * Class Model
  * @package Kaswell\NbnbApi\Abstracts
  */
-abstract class Model implements HasProperties
+abstract class Model implements HasPropertiesContract, ArrayableContract
 {
     use Traits\HasProperties;
     use Traits\Arrayable;
@@ -17,6 +18,7 @@ abstract class Model implements HasProperties
     /**
      * Model constructor.
      * @param ...$data
+     * @return void
      */
     public function __construct(...$data)
     {
