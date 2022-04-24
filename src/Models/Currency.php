@@ -118,10 +118,13 @@ class Currency extends Model
 
     /**
      * Currency constructor.
+     * @var array $data
      */
-    public function __construct()
+    public function __construct(?array $data = null)
     {
         parent::__construct();
+
+        $this->init($data);
     }
 
     /**
@@ -130,6 +133,10 @@ class Currency extends Model
      */
     public function init(array $data): void
     {
-
+        foreach ($data as $property => $value){
+            if (property_exists(self::class, $property)){
+                $this->{$property} = $value;
+            }
+        }
     }
 }
