@@ -1,10 +1,12 @@
 <?php
 
+namespace Kaswell\NbrbBankApi\Helpers;
 
-namespace Kaswell\NbrbBankApi\Traits;
-
-
-trait Str
+/**
+ * Trait Str
+ * @package Kaswell\NbrbBankApi\Helpers
+ */
+final class Str
 {
     /**
      * The cache of studly-cased words.
