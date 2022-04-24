@@ -1,6 +1,6 @@
 <?php
 
-namespace Kaswell\NbnbApi\Abstracts;
+namespace Kaswell\NbrbBankApi\Abstracts;
 
 /**
  * Class Model

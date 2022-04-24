@@ -3,7 +3,7 @@
 namespace Kaswell\NbrbBankApi\Models;
 
 use Carbon\Carbon;
-use Kaswell\NbnbApi\Abstracts\Model;
+use Kaswell\NbrbBankApi\Abstracts\Model;
 
 /**
  * Class Currency
@@ -115,4 +115,12 @@ class Currency extends Model
      * дата исключения валюты из перечня валют, к которым устанавливается официальный курс бел. рубля
      */
     protected Carbon $date_end;
+
+    /**
+     * Currency constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
 }
