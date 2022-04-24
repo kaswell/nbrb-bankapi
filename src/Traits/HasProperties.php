@@ -14,7 +14,7 @@ trait HasProperties
     /**
      * @var array
      */
-    protected array $aliases = [];
+    protected static array $aliases = [];
 
     /**
      * @param string $property
@@ -22,7 +22,7 @@ trait HasProperties
      */
     protected function hasPropertyAlias(string $property): bool
     {
-        return array_key_exists($property, $this->aliases);
+        return array_key_exists($property, static::$aliases);
     }
 
     /**
@@ -31,7 +31,7 @@ trait HasProperties
      */
     protected function getPropertyAlias(string $property): string
     {
-        return $this->hasPropertyAlias($property) ? $this->aliases[$property] : $property;
+        return $this->hasPropertyAlias($property) ? static::$aliases[$property] : $property;
     }
 
     /**
@@ -49,7 +49,9 @@ trait HasProperties
      */
     public function setProperty(string $property, mixed $value): void
     {
-        $property = $this->getPropertyAlias($property);
+        if ($this->hasPropertyAlias($property)) {
+            $property = $this->getPropertyAlias($property);
+        }
 
         if (!$this->hasProperty($property)) {
             return;
@@ -67,7 +69,9 @@ trait HasProperties
      */
     public function getProperty(string $property): mixed
     {
-        $property = $this->getPropertyAlias($property);
+        if ($this->hasPropertyAlias($property)) {
+            $property = $this->getPropertyAlias($property);
+        }
 
         if (!$this->hasProperty($property)){
             return null;

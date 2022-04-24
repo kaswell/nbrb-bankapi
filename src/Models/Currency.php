@@ -115,4 +115,27 @@ class Currency extends Model
      * дата исключения валюты из перечня валют, к которым устанавливается официальный курс бел. рубля
      */
     protected Carbon $date_end;
+
+    /**
+     * @var array
+     */
+    protected static array $aliases = [
+        'Cur_ID' => 'id',
+        'Cur_ParentID' => 'parent_id',
+        'Cur_Code',
+        'Cur_Abbreviation',
+        'Cur_Name' => 'name',
+        'Cur_Name_Bel',
+        'Cur_Name_Eng',
+        'Cur_QuotName',
+        'Cur_QuotName_Bel',
+        'Cur_QuotName_Eng',
+        'Cur_NameMulti',
+        'Cur_Name_BelMulti',
+        'Cur_Name_EngMulti',
+        'Cur_Scale' => 'scale',
+        'Cur_Periodicity' => 'periodicity',
+        'Cur_DateStart' => 'date_start',
+        'Cur_DateEnd' => 'date_end'
+    ];
 }
