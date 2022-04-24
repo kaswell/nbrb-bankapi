@@ -12,12 +12,35 @@ trait HasProperties
     use HasAccessors;
 
     /**
+     * @var array
+     */
+    protected array $aliases = [];
+
+    /**
      * @param string $property
      * @return bool
      */
-    public function hasProperty(string $property): bool
+    protected function hasPropertyAlias(string $property): bool
     {
-        return property_exists($this, $property);
+        return array_key_exists($property, $this->aliases);
+    }
+
+    /**
+     * @param string $property
+     * @return string
+     */
+    protected function getPropertyAlias(string $property): string
+    {
+        return $this->hasPropertyAlias($property) ? $this->aliases[$property] : $property;
+    }
+
+    /**
+     * @param string $property
+     * @return bool
+     */
+    protected function hasProperty(string $property): bool
+    {
+        return property_exists($this, $this->getPropertyAlias($property));
     }
 
     /**
@@ -26,6 +49,8 @@ trait HasProperties
      */
     public function setProperty(string $property, mixed $value): void
     {
+        $property = $this->getPropertyAlias($property);
+
         if (!$this->hasProperty($property)) {
             return;
         }
@@ -42,6 +67,8 @@ trait HasProperties
      */
     public function getProperty(string $property): mixed
     {
+        $property = $this->getPropertyAlias($property);
+
         if (!$this->hasProperty($property)){
             return null;
         }
