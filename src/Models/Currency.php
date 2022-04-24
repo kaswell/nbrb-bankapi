@@ -115,28 +115,4 @@ class Currency extends Model
      * дата исключения валюты из перечня валют, к которым устанавливается официальный курс бел. рубля
      */
     protected Carbon $date_end;
-
-    /**
-     * Currency constructor.
-     * @var array $data
-     */
-    public function __construct(?array $data = null)
-    {
-        parent::__construct();
-
-        $this->init($data);
-    }
-
-    /**
-     * @param array $data
-     * @return void
-     */
-    public function init(array $data): void
-    {
-        foreach ($data as $property => $value){
-            if (property_exists(self::class, $property)){
-                $this->{$property} = $value;
-            }
-        }
-    }
 }
