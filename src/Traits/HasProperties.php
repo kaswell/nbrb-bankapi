@@ -18,7 +18,7 @@ trait HasProperties
      */
     public function hasProperty(string $property): bool
     {
-        return property_exists($this, $property) || property_exists($this, $this->getPropertyAlias($property));
+        return property_exists($this, $property);
     }
 
     /**
@@ -38,6 +38,8 @@ trait HasProperties
         if ($this->hasMutator($property)){
             $mutator = $this->getMutator($property);
             $mutator($value);
+        } else {
+            $this->{$property} = $value;
         }
     }
 

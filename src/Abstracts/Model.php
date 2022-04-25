@@ -23,6 +23,11 @@ abstract class Model implements HasPropertiesContract, HasPropertiesAliasContrac
      */
     public function __construct(...$data)
     {
+        if (array_is_list($data)){
+            if (is_array($data[0]) && !array_is_list($data[0])){
+                $data = $data[0];
+            }
+        }
         $this->init($data);
     }
 
