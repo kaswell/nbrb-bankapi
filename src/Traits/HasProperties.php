@@ -41,7 +41,7 @@ trait HasProperties
 
         if ($this->hasMutator($property)){
             $mutator = $this->getMutator($property);
-            $mutator($value);
+            $this->$mutator($value);
         } else {
             $this->{$property} = $value;
         }
@@ -64,7 +64,7 @@ trait HasProperties
         if ($this->hasAccessor($property)){
             $accessor = $this->getAccessor($property);
 
-            return $accessor();
+            return $this->$accessor();
         }
 
         return $this->{$property};

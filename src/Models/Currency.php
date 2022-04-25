@@ -138,4 +138,22 @@ class Currency extends Model
         'Cur_DateStart' => 'date_start',
         'Cur_DateEnd' => 'date_end'
     ];
+
+    /**
+     * @param mixed $value
+     * @return void
+     */
+    public function setDateStartProperty(mixed $value): void
+    {
+        $this->date_start = Carbon::parse($value);
+    }
+
+    /**
+     * @param mixed $value
+     * @return void
+     */
+    public function setDateEndProperty(mixed $value): void
+    {
+        $this->date_end = Carbon::parse($value);
+    }
 }

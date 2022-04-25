@@ -4,6 +4,6 @@ require __DIR__ . '/../vendor/autoload.php';
 
 $bank = new \Kaswell\NbrbBankApi\Bank();
 
-print_r($bank);
+print_r($bank->getCurrencies());
 
-echo "START TEST"; echo "\n";
+echo "\n"; echo "START TEST"; echo "\n";

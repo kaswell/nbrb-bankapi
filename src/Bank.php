@@ -4,6 +4,7 @@ namespace Kaswell\NbrbBankApi;
 
 use Kaswell\NbrbBankApi\Contracts\ConfigurationContract as Config;
 use Kaswell\NbrbBankApi\Contracts\TransportContract as Transport;
+use Kaswell\NbrbBankApi\Models\Currency;
 
 class Bank
 {
@@ -24,7 +25,8 @@ class Bank
     public function __construct(Config $config = new Configuration, Transport $transport = new CurlTransport)
     {
         $this->config = $config;
-        $this->transport = $transport;
+
+        $this->transport = $transport->init($this->config);
     }
 
 
@@ -32,5 +34,10 @@ class Bank
     {
         $this->transport->send('currencies');
 
+        $currencies = [];
+        foreach ($this->transport->result() as $data){
+            $currencies[] = new Currency($data);
+        }
+        return $currencies;
     }
 }

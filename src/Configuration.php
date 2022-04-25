@@ -14,4 +14,9 @@ class Configuration implements ConfigurationContract
     {
 
     }
+
+    public function url(): string
+    {
+        return 'https://www.nbrb.by/api/exrates/';
+    }
 }
