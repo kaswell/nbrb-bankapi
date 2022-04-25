@@ -31,6 +31,10 @@ class Curl extends AbstractTransport
             throw new \Exception();
         }
 
+        if (!method_exists($this, $request_type)){
+            throw new \Exception();
+        }
+
         $this->sanitizeRequest($request_type, $request);
 
         return $this->{$request_type}();
@@ -44,7 +48,10 @@ class Curl extends AbstractTransport
     protected function sanitizeRequest(string $request_type, array $request): void
     {
         switch ($request_type){
-            case 'currency':
+            case 'currency': break;
+            case 'rates': break;
+            case 'rate': break;
+            default: break;
         }
         $this->request($request);
     }
@@ -88,16 +95,12 @@ class Curl extends AbstractTransport
 
 
 
-    protected function rates(array $data): array
+    protected function rates()
     {
-        $this->send('rates/' . $data['id']);
-
     }
 
-    protected function rate(array $data): array
+    protected function rate()
     {
-        $this->send('rates/' . $data['id']);
-
     }
 
     /**
