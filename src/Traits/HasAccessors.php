@@ -2,7 +2,7 @@
 
 namespace Kaswell\NbrbBankApi\Traits;
 
-use Kaswell\NbrbBankApi\Helpers\Str;
+use Kaswell\NbrbBankApi\StrHelper;
 
 /**
  * Class HasAccessors
@@ -25,6 +25,6 @@ trait HasAccessors
      */
     public function getAccessor(string $property): string
     {
-        return 'get' . Str::studly($property).'Property';
+        return 'get' . StrHelper::studly($property).'Property';
     }
 }

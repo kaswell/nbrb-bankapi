@@ -17,6 +17,10 @@ class Bank
      */
     protected Transport $transport;
 
+    /**
+     * @param Config $config
+     * @param Transport $transport
+     */
     public function __construct(Config $config = new Configuration, Transport $transport = new CurlTransport)
     {
         $this->config = $config;
