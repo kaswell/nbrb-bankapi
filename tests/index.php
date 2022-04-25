@@ -2,11 +2,8 @@
 
 require __DIR__ . '/../vendor/autoload.php';
 
-use Kaswell\NbrbBankApi\Models\Currency;
+$bank = new \Kaswell\NbrbBankApi\Bank();
 
-$model = new Currency(['Cur_ID'=>2, 'name'=>'ff']);
-$model->setProperty('name', 'test');
-
-print_r($model->toArray());
+print_r($bank);
 
 echo "START TEST"; echo "\n";
