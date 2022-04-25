@@ -37,7 +37,7 @@ class Curl extends AbstractTransport
 
         $this->sanitizeRequest($request_type, $request);
 
-        return $this->{$request_type}();
+        return $this->{$request_type}($this->request);
     }
 
     /**
