@@ -8,39 +8,17 @@ namespace Kaswell\NbrbBankApi\Traits;
  */
 trait HasProperties
 {
+    use HasPropertiesAlias;
     use HasMutators;
     use HasAccessors;
 
     /**
-     * @var array
-     */
-    protected static array $aliases = [];
-
-    /**
      * @param string $property
      * @return bool
      */
-    protected function hasPropertyAlias(string $property): bool
+    public function hasProperty(string $property): bool
     {
-        return array_key_exists($property, static::$aliases);
-    }
-
-    /**
-     * @param string $property
-     * @return string
-     */
-    protected function getPropertyAlias(string $property): string
-    {
-        return $this->hasPropertyAlias($property) ? static::$aliases[$property] : $property;
-    }
-
-    /**
-     * @param string $property
-     * @return bool
-     */
-    protected function hasProperty(string $property): bool
-    {
-        return property_exists($this, $this->getPropertyAlias($property));
+        return property_exists($this, $property) || property_exists($this, $this->getPropertyAlias($property));
     }
 
     /**

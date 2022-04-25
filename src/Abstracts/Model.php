@@ -3,6 +3,7 @@
 namespace Kaswell\NbrbBankApi\Abstracts;
 
 use Kaswell\NbrbBankApi\Contracts\ArrayableContract;
+use Kaswell\NbrbBankApi\Contracts\HasPropertiesAliasContract;
 use Kaswell\NbrbBankApi\Contracts\HasPropertiesContract;
 use Kaswell\NbrbBankApi\Traits;
 
@@ -10,7 +11,7 @@ use Kaswell\NbrbBankApi\Traits;
  * Class Model
  * @package Kaswell\NbnbApi\Abstracts
  */
-abstract class Model implements HasPropertiesContract, ArrayableContract
+abstract class Model implements HasPropertiesContract, HasPropertiesAliasContract, ArrayableContract
 {
     use Traits\HasProperties;
     use Traits\Arrayable;
@@ -29,7 +30,7 @@ abstract class Model implements HasPropertiesContract, ArrayableContract
      * @param array $data
      * @return void
      */
-    public function init(array $data): void
+    public function init(array $data = []): void
     {
         foreach ($data as $property => $value) {
             if ($this->hasProperty($property)) {
