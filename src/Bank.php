@@ -26,4 +26,11 @@ class Bank
         $this->config = $config;
         $this->transport = $transport;
     }
+
+
+    public function getCurrencies()
+    {
+        $this->transport->send('currencies');
+
+    }
 }
