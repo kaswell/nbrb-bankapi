@@ -18,6 +18,10 @@ trait HasProperties
      */
     public function hasProperty(string $property): bool
     {
+        if ($this->hasPropertyAlias($property)) {
+            $property = $this->getPropertyAlias($property);
+        }
+
         return property_exists($this, $property);
     }
 

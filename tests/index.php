@@ -4,7 +4,7 @@ require __DIR__ . '/../vendor/autoload.php';
 
 use Kaswell\NbrbBankApi\Models\Currency;
 
-$model = new Currency(['id'=>2]);
+$model = new Currency(['Cur_ID'=>2, 'name'=>'ff']);
 $model->setProperty('name', 'test');
 
 print_r($model->toArray());

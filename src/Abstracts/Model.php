@@ -5,13 +5,14 @@ namespace Kaswell\NbrbBankApi\Abstracts;
 use Kaswell\NbrbBankApi\Contracts\ArrayableContract;
 use Kaswell\NbrbBankApi\Contracts\HasPropertiesAliasContract;
 use Kaswell\NbrbBankApi\Contracts\HasPropertiesContract;
+use Kaswell\NbrbBankApi\Contracts\ModelContract;
 use Kaswell\NbrbBankApi\Traits;
 
 /**
  * Class Model
  * @package Kaswell\NbnbApi\Abstracts
  */
-abstract class Model implements HasPropertiesContract, HasPropertiesAliasContract, ArrayableContract
+abstract class Model implements ModelContract, HasPropertiesContract, HasPropertiesAliasContract, ArrayableContract
 {
     use Traits\HasProperties;
     use Traits\Arrayable;
