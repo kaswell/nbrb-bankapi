@@ -10,7 +10,9 @@ interface TransportContract
     public function __construct(ConfigurationContract $config);
 
     /**
+     * @param string $request_type
+     * @param ...$request
      * @return array
      */
-    public function response(): array;
+    public function get(string $request_type, ...$request): array;
 }

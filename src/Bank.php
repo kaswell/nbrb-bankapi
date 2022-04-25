@@ -32,10 +32,9 @@ class Bank
 
     public function getCurrencies()
     {
-        $this->transport->send('currencies');
-
+        return $this->transport->get('currency', id: 1);
         $currencies = [];
-        foreach ($this->transport->response() as $data){
+        foreach ($this->transport->get('currencies') as $data){
             $currencies[] = (new Currency($data))->toArray();
         }
         return $currencies;

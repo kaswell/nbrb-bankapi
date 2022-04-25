@@ -2,16 +2,8 @@
 
 namespace Kaswell\NbrbBankApi\Transports;
 
-use Kaswell\NbrbBankApi\Contracts\ConfigurationContract as Config;
-use Kaswell\NbrbBankApi\Contracts\TransportContract as Transport;
-
-class Curl implements Transport
+class Curl extends AbstractTransport
 {
-    /**
-     * @var Config
-     */
-    protected Config $config;
-
     /**
      * @var string
      */
@@ -23,11 +15,89 @@ class Curl implements Transport
     protected array $errors = [];
 
     /**
-     * @param Config $config
+     * @var array
      */
-    public function __construct(Config $config)
+    protected array $request = [];
+
+    /**
+     * @param string $request_type
+     * @param ...$request
+     * @return array
+     * @throws \Exception
+     */
+    public function get(string $request_type, ...$request): array
     {
-        $this->config = $config;
+        if (!in_array($request_type, $this->requests)) {
+            throw new \Exception();
+        }
+
+        $this->sanitizeRequest($request_type, $request);
+
+        return $this->{$request_type}();
+    }
+
+    /**
+     * @param string $request_type
+     * @param array $request
+     * @return void
+     */
+    protected function sanitizeRequest(string $request_type, array $request): void
+    {
+        switch ($request_type){
+            case 'currency':
+        }
+        $this->request($request);
+    }
+
+    /**
+     * @param array $request
+     * @return void
+     */
+    protected function request(array $request): void
+    {
+        $this->request = $request;
+    }
+
+
+    /**
+     * @return array
+     */
+    protected function currencies(): array
+    {
+        $this->send('currencies');
+
+        return $this->response();
+    }
+
+
+    protected function currency(): array
+    {
+        extract($this->request, EXTR_REFS);
+
+        if (!isset($id)){
+            throw new \Exception('Не задан ID.');
+        }
+
+        /* ondate periodicity parammode */
+        $query = http_build_query($this->request);
+
+        $this->send('currencies/' . $this->request['id']);
+
+        return $this->response();
+    }
+
+
+
+    protected function rates(array $data): array
+    {
+        $this->send('rates/' . $data['id']);
+
+    }
+
+    protected function rate(array $data): array
+    {
+        $this->send('rates/' . $data['id']);
+
     }
 
     /**
@@ -36,49 +106,29 @@ class Curl implements Transport
      * @param array $data
      * @return void
      */
-    public function send(string $url, string $method = 'GET', array $data = []): void
-    {
-        $this->response = $this->get($url, $method, $data);
-    }
-
-    /**
-     * @param string $url
-     * @return bool|string
-     */
-    protected function get(string $url, string $method = 'GET', array $data = []): bool|string
+    protected function send(string $url): void
     {
         $curl = curl_init();
 
         curl_setopt($curl, CURLOPT_URL, $this->config->url() . $url);
-        curl_setopt($curl, CURLOPT_HTTPHEADER, [
-            'Accept' => 'application/json',
-            'Content-Type' => 'application/json'
-        ]);
+        curl_setopt($curl, CURLOPT_HTTPGET, true);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 
-        if (mb_strtolower($method) === 'post'){
-            curl_setopt($curl, CURLOPT_POST, true);
-            curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
-        } else {
-            curl_setopt($curl, CURLOPT_HTTPGET, true);
-        }
+        $this->response = curl_exec($curl);
 
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER,true);
-
-        $result = curl_exec($curl);
         curl_close($curl);
-
-        return $result;
     }
 
     /**
      * @return array
      */
-    public function response(): array
+    protected function response(): array
     {
         $response = [];
         try {
             $response = json_decode($this->response, true);
         } finally {
+            $this->errors[] = 'Не возможно декодировать';
             return $response;
         }
     }
