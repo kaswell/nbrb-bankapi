@@ -10,13 +10,32 @@ use Kaswell\NbrbBankApi\Contracts\ConfigurationContract;
  */
 class Configuration implements ConfigurationContract
 {
-    public function __construct()
-    {
+    /**
+     * @var array
+     */
+    protected array $config;
 
+    /**
+     * @param string|null $path
+     */
+    public function __construct(string $path = null)
+    {
+        $this->config = require_once __DIR__ . '/../config/nbrb-bankapi.php';
     }
 
+    /**
+     * @return string
+     */
     public function url(): string
     {
-        return 'https://www.nbrb.by/api/exrates/';
+        return $this->config['url'];
+    }
+
+    /**
+     * @return string
+     */
+    public function transport(): string
+    {
+        return $this->config['transport'];
     }
 }

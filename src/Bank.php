@@ -3,7 +3,7 @@
 namespace Kaswell\NbrbBankApi;
 
 use Kaswell\NbrbBankApi\Contracts\ConfigurationContract as Config;
-use Kaswell\NbrbBankApi\Contracts\TransportContract as Transport;
+use Kaswell\NbrbBankApi\Contracts\TransportContract;
 use Kaswell\NbrbBankApi\Models\Currency;
 
 class Bank
@@ -14,19 +14,19 @@ class Bank
     protected Config $config;
 
     /**
-     * @var Transport
+     * @var TransportContract
      */
-    protected Transport $transport;
+    protected TransportContract $transport;
 
     /**
      * @param Config $config
-     * @param Transport $transport
+     * @throws \Exception
      */
-    public function __construct(Config $config = new Configuration, Transport $transport = new CurlTransport)
+    public function __construct(Config $config = new Configuration)
     {
         $this->config = $config;
 
-        $this->transport = $transport->init($this->config);
+        $this->transport = TransportFactory::create($this->config);
     }
 
 
@@ -35,8 +35,8 @@ class Bank
         $this->transport->send('currencies');
 
         $currencies = [];
-        foreach ($this->transport->result() as $data){
-            $currencies[] = new Currency($data);
+        foreach ($this->transport->response() as $data){
+            $currencies[] = (new Currency($data))->toArray();
         }
         return $currencies;
     }
