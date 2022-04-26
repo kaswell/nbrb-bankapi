@@ -91,16 +91,15 @@ class Bank
         return $rates;
     }
 
-
     /**
      * @param int|string $id
      * @param int $parammode
      * @param string|null $ondate
-     * @param int|null $periodicity
+     * @param int $periodicity
      * @return array
      * @throws \Exception
      */
-    public function getRate(int|string $id, int $parammode = 0, string $ondate = null, int $periodicity = null): array
+    public function getRate(int|string $id, int $parammode = 0, string $ondate = null, int $periodicity = 0): array
     {
         if (Validator::make(Request::Rates, id: $id, parammode: $parammode, ondate: $ondate, periodicity: $periodicity)) {
             throw new \Exception('Validation exception');

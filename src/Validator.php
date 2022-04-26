@@ -43,13 +43,23 @@ class Validator
      */
     public function validateCurrencies(array $request_data): void
     {
-        if (isset($request_data['id']) && is_int($request_data['id'])){
+        if (isset($request_data['id']) && !is_int($request_data['id'])){
             $this->isInvalid = true;
         }
     }
 
+    /**
+     * @param array $request_data
+     * @return void
+     */
     public function validateRates(array $request_data): void
     {
+        if (isset($request_data['periodicity']) && !in_array($request_data['periodicity'], [0, 1])){
+            $this->isInvalid = true;
+        }
 
+        if (isset($request_data['id']) && !is_int($request_data['id'])) {
+            $this->isInvalid = true;
+        }
     }
 }
