@@ -30,4 +30,14 @@ abstract class Validator implements ValidatorContract
     {
         return $this->exception;
     }
+
+    /**
+     * @param string $message
+     * @return void
+     */
+    protected function invalid(string $message)
+    {
+        $this->exception = new Exception($message);
+        $this->isInvalid = true;
+    }
 }

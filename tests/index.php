@@ -6,4 +6,4 @@ $bank = new \Kaswell\NbrbBankApi\Bank();
 
 echo "\n"; echo "START TEST"; echo "\n";
 
-print_r($bank->getCurrencies(1));
+print_r($bank->getRate(506, ondate: '2022-1-5'));

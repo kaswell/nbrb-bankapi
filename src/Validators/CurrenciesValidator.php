@@ -3,7 +3,6 @@
 namespace Kaswell\NbrbBankApi\Validators;
 
 use Kaswell\NbrbBankApi\Abstracts\Validator;
-use Exception;
 use Kaswell\NbrbBankApi\Helpers\Str;
 
 class CurrenciesValidator extends Validator
@@ -31,8 +30,7 @@ class CurrenciesValidator extends Validator
     protected function validateId(mixed $id): void
     {
         if (!is_int($id)){
-            $this->exception = new Exception('Invalid type ID.');
-            $this->isInvalid = true;
+            $this->invalid('Invalid type ID.');
         }
     }
 }
