@@ -3,8 +3,8 @@
 namespace Kaswell\NbrbBankApi;
 
 use Exception;
+use Kaswell\NbrbBankApi\Abstracts\Transport;
 use Kaswell\NbrbBankApi\Contracts\ConfigurationContract as Config;
-use Kaswell\NbrbBankApi\Contracts\TransportContract as Transport;
 use Kaswell\NbrbBankApi\Helpers\Str;
 
 class TransportFactory
@@ -12,7 +12,7 @@ class TransportFactory
     /**
      * @param Config $config
      * @return Transport
-     * @throws \Exception
+     * @throws Exception
      */
     public static function create(Config $config): Transport
     {

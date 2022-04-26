@@ -42,7 +42,7 @@ class Bank
             return $this->getCurrency($id);
         }
 
-        $this->transport->get(Request::Currencies->path());
+        $this->transport->get(path: Request::Currencies->path());
 
         $currencies = [];
         foreach ($this->transport->response() as $data) {
@@ -59,11 +59,11 @@ class Bank
      */
     public function getCurrency(int $id): array
     {
-        if (Validator::make(Request::Currencies, id: $id)) {
+        if (ValidatorFactory::make(Request::Currencies)->validate(id: $id)) {
             throw new \Exception('Validation exception');
         }
 
-        $this->transport->get(Request::Currencies->path(), id: $id);
+        $this->transport->get(path: Request::Currencies->path(), id: $id);
 
         $currency = new Currency($this->transport->response());
 
@@ -77,11 +77,11 @@ class Bank
      */
     public function getRates(string $ondate = null, int $periodicity = 0): array
     {
-        if (Validator::make(Request::Rates, ondate: $ondate, periodicity: $periodicity)) {
+        if (ValidatorFactory::make(Request::Rates)->validate(ondate: $ondate, periodicity: $periodicity)) {
             throw new \Exception('Validation exception');
         }
 
-        $this->transport->get(Request::Rates->path(), ondate: $ondate, periodicity: $periodicity);
+        $this->transport->get(path: Request::Rates->path(), ondate: $ondate, periodicity: $periodicity);
 
         $rates = [];
         foreach ($this->transport->response() as $data) {
@@ -101,11 +101,11 @@ class Bank
      */
     public function getRate(int|string $id, int $parammode = 0, string $ondate = null, int $periodicity = 0): array
     {
-        if (Validator::make(Request::Rates, id: $id, parammode: $parammode, ondate: $ondate, periodicity: $periodicity)) {
+        if (ValidatorFactory::make(Request::Rates)->validate(id: $id, parammode: $parammode, ondate: $ondate, periodicity: $periodicity)) {
             throw new \Exception('Validation exception');
         }
 
-        $this->transport->get(Request::Rates->path(), id: $id, ondate: $ondate, parammode: $parammode, periodicity: $periodicity);
+        $this->transport->get(path: Request::Rates->path(), id: $id, ondate: $ondate, parammode: $parammode, periodicity: $periodicity);
 
         $rate = new Rate($this->transport->response());
 
