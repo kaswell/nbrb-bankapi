@@ -7,6 +7,8 @@ use Kaswell\NbrbBankApi\Contracts\ConfigurationContract;
 /**
  * Class Configuration
  * @package Kaswell\NbrbBankApi
+ * @property string $url
+ * @property string $transport
  */
 class Configuration implements ConfigurationContract
 {
@@ -18,24 +20,19 @@ class Configuration implements ConfigurationContract
     /**
      * @param string|null $path
      */
-    public function __construct(string $path = null)
+    public function __construct(?string $path = null)
     {
-        $this->config = require_once __DIR__ . '/../config/nbrb-bankapi.php';
+        if ($path === null) {
+            $this->config = require_once __DIR__ . '/../config/nbrb-bankapi.php';
+        }
     }
 
     /**
-     * @return string
+     * @param string $option
+     * @return mixed|null
      */
-    public function url(): string
+    public function __get(string $option): mixed
     {
-        return $this->config['url'];
-    }
-
-    /**
-     * @return string
-     */
-    public function transport(): string
-    {
-        return $this->config['transport'];
+        return isset($this->config[$option]) ? $this->config[$option] : null;
     }
 }

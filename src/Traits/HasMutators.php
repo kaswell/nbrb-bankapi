@@ -2,7 +2,7 @@
 
 namespace Kaswell\NbrbBankApi\Traits;
 
-use Kaswell\NbrbBankApi\StrHelper;
+use Kaswell\NbrbBankApi\Helpers\Str;
 
 /**
  * Trait HasMutators
@@ -25,6 +25,6 @@ trait HasMutators
      */
     public function getMutator(string $property): string
     {
-        return 'set' . StrHelper::studly($property).'Property';
+        return 'set' . Str::studly($property).'Property';
     }
 }

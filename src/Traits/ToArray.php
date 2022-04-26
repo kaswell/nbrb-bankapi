@@ -3,10 +3,10 @@
 namespace Kaswell\NbrbBankApi\Traits;
 
 /**
- * Trait Arrayable
+ * Trait ToArray
  * @package Kaswell\NbrbBankApi\Traits
  */
-trait Arrayable
+trait ToArray
 {
     /**
      * @return array

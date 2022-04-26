@@ -15,7 +15,7 @@ use Kaswell\NbrbBankApi\Traits;
 abstract class Model implements ModelContract, HasPropertiesContract, HasPropertiesAliasContract, ArrayableContract
 {
     use Traits\HasProperties;
-    use Traits\Arrayable;
+    use Traits\ToArray;
 
     /**
      * Model constructor.
