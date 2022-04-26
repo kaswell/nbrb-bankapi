@@ -6,6 +6,7 @@ use Kaswell\NbrbBankApi\Contracts\ConfigurationContract as Config;
 use Kaswell\NbrbBankApi\Contracts\TransportContract;
 use Kaswell\NbrbBankApi\Enums\Request;
 use Kaswell\NbrbBankApi\Models\Currency;
+use Kaswell\NbrbBankApi\Models\Rate;
 
 class Bank
 {
@@ -30,16 +31,21 @@ class Bank
         $this->transport = TransportFactory::create($this->config);
     }
 
-
     /**
+     * @param int|null $id
      * @return array
+     * @throws \Exception
      */
-    public function getCurrencies(): array
+    public function getCurrencies(?int $id = null): array
     {
+        if ($id !== null) {
+            return $this->getCurrency($id);
+        }
+
         $this->transport->get(Request::Currencies->path());
 
         $currencies = [];
-        foreach ($this->transport->response() as $data){
+        foreach ($this->transport->response() as $data) {
             $currencies[] = (new Currency($data))->toArray();
         }
 
@@ -47,29 +53,63 @@ class Bank
     }
 
     /**
-     * @param int|string $id
-     * @param string|null $ondate
-     * @param int|null $periodicity
-     * @param int $parammode
+     * @param int $id
      * @return array
+     * @throws \Exception
      */
-    public function getCurrency(int|string $id, string $ondate = null, int $periodicity = null, int $parammode = 0): array
+    public function getCurrency(int $id): array
     {
-        $this->transport->get(Request::Currency->path(), id: $id);
+        if (Validator::make(Request::Currencies, id: $id)) {
+            throw new \Exception('Validation exception');
+        }
+
+        $this->transport->get(Request::Currencies->path(), id: $id);
 
         $currency = new Currency($this->transport->response());
 
         return $currency->toArray();
     }
 
-
-    public function getRates()
+    /**
+     * @param string|null $ondate
+     * @param int $periodicity
+     * @return array
+     */
+    public function getRates(string $ondate = null, int $periodicity = 0): array
     {
-        $this->transport->get(Request::Rates->path());
+        if (Validator::make(Request::Rates, ondate: $ondate, periodicity: $periodicity)) {
+            throw new \Exception('Validation exception');
+        }
+
+        $this->transport->get(Request::Rates->path(), ondate: $ondate, periodicity: $periodicity);
+
+        $rates = [];
+        foreach ($this->transport->response() as $data) {
+            $rates[] = (new Rate($data))->toArray();
+        }
+
+        return $rates;
     }
 
-    public function getRate()
+
+    /**
+     * @param int|string $id
+     * @param int $parammode
+     * @param string|null $ondate
+     * @param int|null $periodicity
+     * @return array
+     * @throws \Exception
+     */
+    public function getRate(int|string $id, int $parammode = 0, string $ondate = null, int $periodicity = null): array
     {
-        $this->transport->get(Request::Rate->path());
+        if (Validator::make(Request::Rates, id: $id, parammode: $parammode, ondate: $ondate, periodicity: $periodicity)) {
+            throw new \Exception('Validation exception');
+        }
+
+        $this->transport->get(Request::Rates->path(), id: $id, ondate: $ondate, parammode: $parammode, periodicity: $periodicity);
+
+        $rate = new Rate($this->transport->response());
+
+        return $rate->toArray();
     }
 }

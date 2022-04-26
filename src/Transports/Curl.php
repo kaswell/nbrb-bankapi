@@ -9,7 +9,7 @@ class Curl extends Transport
     /**
      * @var string
      */
-    protected string $response;
+    public string $response;
 
     /**
      * @var array
@@ -25,7 +25,7 @@ class Curl extends Transport
     {
         $url = $this->config->url . $path;
 
-        if (isset($request_data['id'])){
+        if (isset($request_data['id'])) {
             $url .= '/' . $request_data['id'];
             unset($request_data['id']);
         }
@@ -34,6 +34,7 @@ class Curl extends Transport
             $url .= '?' . http_build_query($request_data);
         }
 
+        print_r($url . ' ');
         $this->send($url);
     }
 
@@ -60,12 +61,16 @@ class Curl extends Transport
      */
     public function response(): array
     {
-        $response = [];
-        try {
-            $response = json_decode($this->response, true);
-        } finally {
-            $this->errors[] = 'Не возможно декодировать';
-            return $response;
-        }
+        $response = json_decode($this->response, true) ?? $this->hasError();
+
+        return $response;
+    }
+
+    /**
+     * @return array
+     */
+    protected function hasError(): array
+    {
+        return [];
     }
 }

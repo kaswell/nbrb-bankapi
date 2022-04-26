@@ -2,6 +2,7 @@
 
 namespace Kaswell\NbrbBankApi\Models;
 
+use Carbon\Carbon;
 use Kaswell\NbrbBankApi\Abstracts\Model;
 
 /**
@@ -16,7 +17,11 @@ class Rate extends Model
      */
     protected int $id;
 
-    protected $date;
+    /**
+     * @var Carbon
+     * дата, на которую запрашивается курс
+     */
+    protected Carbon $date;
 
     /**
      * @var string
@@ -32,10 +37,34 @@ class Rate extends Model
 
     /**
      * @var string
-     * наименование валюты на русском языке
+     * наименование валюты на русском языке во множественном, либо в единственном числе, в зависимости от количества единиц
      */
     protected string $name;
 
-    protected $official_rate;
+    /**
+     * @var float
+     * курс
+     */
+    protected float $official_rate;
 
+    /**
+     * @var array
+     */
+    protected static array $aliases = [
+        'Cur_ID' => 'id',
+        'Date' => 'date',
+        'Cur_Abbreviation' => 'abbreviation;',
+        'Cur_Scale' => 'scale',
+        'Cur_Name' => 'name',
+        'Cur_OfficialRate' => 'official_rate',
+    ];
+
+    /**
+     * @param mixed $value
+     * @return void
+     */
+    public function setDateProperty(mixed $value): void
+    {
+        $this->date = Carbon::parse($value);
+    }
 }
