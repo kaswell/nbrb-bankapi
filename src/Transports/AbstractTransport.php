@@ -7,13 +7,6 @@ use Kaswell\NbrbBankApi\Contracts\TransportContract as Transport;
 
 abstract class AbstractTransport implements Transport
 {
-    protected $requests = [
-        'currencies',
-        'currency',
-        'rates',
-        'rate'
-    ];
-
     /**
      * @var Config
      */

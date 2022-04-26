@@ -30,13 +30,18 @@ class Bank
     }
 
 
-    public function getCurrencies()
+    /**
+     * @return array
+     */
+    public function getCurrencies(): array
     {
-        return $this->transport->get('currency', id: 1);
+        $request_type = Request::Currencies->type();
+
         $currencies = [];
-        foreach ($this->transport->get('currencies') as $data){
+        foreach ($this->transport->get($request_type) as $data){
             $currencies[] = (new Currency($data))->toArray();
         }
+
         return $currencies;
     }
 }

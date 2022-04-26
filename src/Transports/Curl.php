@@ -2,6 +2,8 @@
 
 namespace Kaswell\NbrbBankApi\Transports;
 
+use Kaswell\NbrbBankApi\Request;
+
 class Curl extends AbstractTransport
 {
     /**
@@ -27,12 +29,12 @@ class Curl extends AbstractTransport
      */
     public function get(string $request_type, ...$request): array
     {
-        if (!in_array($request_type, $this->requests)) {
-            throw new \Exception();
+        if (enum_exists(Request::class)){
+
         }
 
         if (!method_exists($this, $request_type)){
-            throw new \Exception();
+            throw new \Exception('Method not found.');
         }
 
         $this->sanitizeRequest($request_type, $request);
