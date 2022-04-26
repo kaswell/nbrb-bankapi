@@ -6,4 +6,4 @@ $bank = new \Kaswell\NbrbBankApi\Bank();
 
 echo "\n"; echo "START TEST"; echo "\n";
 
-print_r($bank->getRate(298));
+print_r($bank->getCurrencies(1));

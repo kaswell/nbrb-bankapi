@@ -6,7 +6,7 @@ use Kaswell\NbrbBankApi\Contracts\ArrayableContract;
 use Kaswell\NbrbBankApi\Contracts\HasPropertiesAliasContract;
 use Kaswell\NbrbBankApi\Contracts\HasPropertiesContract;
 use Kaswell\NbrbBankApi\Contracts\ModelContract;
-use Kaswell\NbrbBankApi\Traits;
+use Kaswell\NbrbBankApi\Models\Traits;
 
 /**
  * Class Model

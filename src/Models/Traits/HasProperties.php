@@ -1,6 +1,6 @@
 <?php
 
-namespace Kaswell\NbrbBankApi\Traits;
+namespace Kaswell\NbrbBankApi\Models\Traits;
 
 /**
  * Trait HasPropertiesContract

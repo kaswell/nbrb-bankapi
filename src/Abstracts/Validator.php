@@ -2,7 +2,10 @@
 
 namespace Kaswell\NbrbBankApi\Abstracts;
 
-abstract class Validator
+use Exception;
+use Kaswell\NbrbBankApi\Contracts\ValidatorContract;
+
+abstract class Validator implements ValidatorContract
 {
     /**
      * @var bool
@@ -10,8 +13,21 @@ abstract class Validator
     protected bool $isInvalid = false;
 
     /**
+     * @var Exception|null
+     */
+    protected ?Exception $exception = null;
+
+    /**
      * @param ...$request_data
      * @return bool
      */
     abstract public function validate(...$request_data): bool;
+
+    /**
+     * @return Exception|null
+     */
+    public function exception(): ?Exception
+    {
+        return $this->exception;
+    }
 }

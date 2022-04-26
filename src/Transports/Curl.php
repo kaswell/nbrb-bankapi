@@ -34,7 +34,6 @@ class Curl extends Transport
             $url .= '?' . http_build_query($request_data);
         }
 
-        print_r($url . ' ');
         $this->send($url);
     }
 
