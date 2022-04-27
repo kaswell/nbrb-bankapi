@@ -19,11 +19,18 @@ class Configuration implements ConfigurationContract
 
     /**
      * @param string|null $path
+     * @throws \Exception
      */
     public function __construct(?string $path = null)
     {
         if ($path === null) {
             $this->config = require_once __DIR__ . '/../config/nbrb-bankapi.php';
+        } else {
+            if (file_exists($path)) {
+                $this->config = require_once $path;
+            } else {
+                throw new \Exception('Config file not found');
+            }
         }
     }
 
